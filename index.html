@@ -489,4 +489,13 @@
       const layout = {
         title: "Customer Segments by Frequency & Avg Spend",
         xaxis: { title: "Purchases/Month" },
-        yaxis: { title
+        yaxis: { title: "Average Spend (USD)" },
+        paper_bgcolor: "#fff",
+        plot_bgcolor: "#fff"
+      };
+
+      Plotly.newPlot('clusteringChart', [clusterA, clusterB, clusterC, clusterD], layout);
+    }
+  </script>
+</body>
+</html>
