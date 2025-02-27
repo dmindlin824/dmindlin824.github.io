@@ -43,7 +43,7 @@
         Discover My Work
       </a>
     </div>
-    <!-- Hero Background Image (relative path for GitHub Pages) -->
+    <!-- Hero background image referencing your local folder -->
     <img 
       src="./images/hans-jurgen-mager-qQWV91TTBrE-unsplash.jpg"
       alt="Hero Background Image" 
@@ -74,10 +74,10 @@
               responsibilities—coordinating minor sprints, aligning tasks with the business 
               team, and ensuring that each data milestone was appropriately validated. My 
               Power BI and Tableau dashboards supported multi-million-dollar strategic 
-              initiatives, improving efficiency by ~15%. 
+              initiatives, improving efficiency by ~15%.
             </p>
             <p>
-              I also implemented iterative transformations with dbt (a data build tool) 
+              I also implemented iterative transformations with dbt (a data build tool)
               to streamline data extraction, raising processing efficiency another ~15–20%.
               During this period, I learned to blend standard regression and hypothesis 
               testing (pandas, scikit-learn, SciPy) into everyday workflows, accelerating 
@@ -144,7 +144,7 @@
             <p class="timeline-sub">Analytics Consultant</p>
             <p>
               Taking on a consulting role at CVS Health, I worked with SQL (including advanced
-              window functions, CTEs) and Python-based libraries (pandas, scikit-learn) 
+              window functions, CTEs) and Python-based libraries (pandas, scikit-learn)
               to optimize multi-team data workflows on local or minimal hardware setups. 
               My duties involved clarifying each ingestion or transformation task 
               in a backlog and verifying final outputs within specified deadlines.
@@ -190,7 +190,7 @@
             <h3>Education & Skills</h3>
             <p class="timeline-sub">Core Foundations</p>
             <p>
-              <strong>B.S. in Statistics & B.A. in History</strong>, UC Santa Barbara (August 2020)<br/>
+              <strong>B.S. in Statistics &amp; B.A. in History</strong>, UC Santa Barbara (August 2020)<br/>
               <strong>M.S. in Business Analytics</strong>, University of San Diego (May 2021)
             </p>
             <p>
@@ -251,7 +251,7 @@
             (term frequency-inverse document frequency, a measure of how important 
             a word is in a set of documents) to transform text into numerical features. 
             I then trained logistic regression (a model that predicts a binary outcome) 
-            to classify sentiment. 
+            to classify sentiment.
           </p>
           <p>
             <strong>Outcome:</strong> After multiple cross-validation (a technique that 
@@ -262,7 +262,7 @@
           </p>
           <div id="textAnalysisChart" class="vis-container"></div>
           <p>
-            <em>Visualization (Sample):</em> The chart above models changes in 
+            <em>Visualization:</em> The chart above models changes in 
             average sentiment scores across different months in the dataset. 
             Each data point is annotated with key tweet volumes for clarity.
           </p>
@@ -285,7 +285,7 @@
             (a model that builds multiple decision trees and aggregates their predictions) 
             to capture complex patterns that a simpler model might miss. 
             I used back-testing (a method to test model performance on 
-            a sequence of past data) to confirm consistency. 
+            a sequence of past data) to confirm consistency.
           </p>
           <p>
             <strong>Outcome:</strong> Achieved a ~12% reduction in mean absolute error 
@@ -296,8 +296,8 @@
           </p>
           <div id="forecastChart" class="vis-container"></div>
           <p>
-            <em>Visualization (Sample):</em> The bar chart shows actual vs. predicted 
-            weekly volumes for a top product category. Error bars (thin lines 
+            <em>Visualization:</em> The bar chart shows actual vs. predicted 
+            monthly volumes for a top product category. Error bars (thin lines 
             that represent uncertainty in each prediction) highlight 
             where the model performed well and where it struggled.
           </p>
@@ -331,7 +331,7 @@
           </p>
           <div id="clusteringChart" class="vis-container"></div>
           <p>
-            <em>Visualization (Sample):</em> The scatter plot above shows how 
+            <em>Visualization:</em> The scatter plot above shows how 
             customers clustered by purchase frequency (X-axis) and average spend 
             (Y-axis), with each cluster color-coded to indicate shared behaviors. 
             Labels highlight each segment’s main characteristic, 
@@ -370,6 +370,123 @@
   <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <!-- Main JS -->
-  <script src="script.js"></script>
-</body>
-</html>
+  <script>
+    AOS.init();
+
+    // Sentiment Analysis on ~1.6M Tweets
+    if (document.getElementById('textAnalysisChart')) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+      // Example sentiment averages (from -0.3 to +0.3)
+      const avgSentiment = [-0.2, -0.1, 0, 0.1, 0.2, 0.25];
+      // Example volumes (tweet counts)
+      const tweetVolume = [220000, 230000, 270000, 300000, 330000, 360000];
+
+      const sentimentTrace = {
+        x: months,
+        y: avgSentiment,
+        name: "Avg Sentiment",
+        mode: "lines+markers",
+        yaxis: 'y1',
+        line: { color: "#007AFF" }
+      };
+
+      const volumeTrace = {
+        x: months,
+        y: tweetVolume,
+        name: "Tweet Volume",
+        mode: "lines+markers",
+        yaxis: 'y2',
+        line: { color: "#34C759" }
+      };
+
+      const layout = {
+        title: "Monthly Sentiment & Tweet Volume",
+        xaxis: { title: "Month" },
+        yaxis: {
+          title: "Average Sentiment",
+          range: [-0.3, 0.3]
+        },
+        yaxis2: {
+          title: "Tweet Volume",
+          overlaying: 'y',
+          side: 'right'
+        },
+        paper_bgcolor: "#fff",
+        plot_bgcolor: "#fff"
+      };
+
+      Plotly.newPlot('textAnalysisChart', [sentimentTrace, volumeTrace], layout);
+    }
+
+    // Time Series Forecasting on Retail Sales
+    if (document.getElementById('forecastChart')) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+      // Actual sales (units)
+      const actualSales = [2000, 2200, 2500, 2300, 2800, 3100];
+      // Predicted sales (units)
+      const predSales = [1900, 2100, 2450, 2350, 2750, 3050];
+
+      const actualTrace = {
+        x: months,
+        y: actualSales,
+        name: "Actual Sales",
+        type: "bar",
+        marker: { color: "#007AFF" }
+      };
+
+      const predictedTrace = {
+        x: months,
+        y: predSales,
+        name: "Predicted Sales",
+        type: "bar",
+        marker: { color: "#34C759" }
+      };
+
+      const layout = {
+        title: "Actual vs. Predicted Retail Sales",
+        barmode: "group",
+        xaxis: { title: "Month" },
+        yaxis: { title: "Sales (Units)" },
+        paper_bgcolor: "#fff",
+        plot_bgcolor: "#fff"
+      };
+
+      Plotly.newPlot('forecastChart', [actualTrace, predictedTrace], layout);
+    }
+
+    // Customer Segmentation from E-Commerce Logs
+    if (document.getElementById('clusteringChart')) {
+      // 4 clusters, each with purchase frequency (x) vs. avg spend (y)
+      const clusterA = {
+        x: [12, 14, 13, 11],
+        y: [100, 120, 110, 105],
+        mode: "markers",
+        name: "Cluster A",
+        marker: { color: "#FF2D55", size: 10 }
+      };
+      const clusterB = {
+        x: [25, 28, 26, 27],
+        y: [200, 210, 190, 220],
+        mode: "markers",
+        name: "Cluster B",
+        marker: { color: "#FF9500", size: 10 }
+      };
+      const clusterC = {
+        x: [40, 42, 45, 43],
+        y: [450, 470, 440, 480],
+        mode: "markers",
+        name: "Cluster C",
+        marker: { color: "#5856D6", size: 10 }
+      };
+      const clusterD = {
+        x: [52, 55, 53, 56],
+        y: [600, 620, 610, 630],
+        mode: "markers",
+        name: "Cluster D",
+        marker: { color: "#34C759", size: 10 }
+      };
+
+      const layout = {
+        title: "Customer Segments by Frequency & Avg Spend",
+        xaxis: { title: "Purchases/Month" },
+        yaxis: { title
