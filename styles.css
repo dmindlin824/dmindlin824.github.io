@@ -296,3 +296,82 @@ section h2 {
 }
 
 /* Respons
+
+
+/* Education & Skills Section */
+.education-skills-section {
+  background: #f9f9f9;
+  padding: 80px 5%;
+  text-align: center;
+}
+
+.education-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.education-card,
+.skills-card,
+.certifications-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 350px;
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.education-card:hover,
+.skills-card:hover,
+.certifications-card:hover {
+  transform: translateY(-5px);
+}
+
+h3 {
+  color: #007AFF;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.education-entry {
+  margin-bottom: 15px;
+}
+
+.edu-year {
+  font-size: 14px;
+  color: #888;
+}
+
+.skills-list,
+.cert-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li,
+.cert-list li {
+  padding: 5px 0;
+  font-size: 16px;
+  color: #333;
+  position: relative;
+}
+
+.skills-list li::before,
+.cert-list li::before {
+  content: "✔";
+  color: #34C759;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .education-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
