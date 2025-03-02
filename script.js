@@ -293,3 +293,71 @@ document.addEventListener("DOMContentLoaded", function() {
     ], layoutIoT);
   }
 });
+
+/**************************************************************************/
+/* Project 5: Credit Card Fraud Detection                                 */
+/**************************************************************************/
+if (document.getElementById('fraudChart')) {
+  // Example data for confusion matrix
+  const actualClasses = ["Legit", "Legit", "Fraud", "Fraud"];
+  const predictedClasses = ["Legit", "Fraud", "Legit", "Fraud"];
+  // Actual matrix counts (row = actual, col = predicted)
+  const confusionMatrix = [
+    [980,  20],  // actual legit: predicted legit = 980, predicted fraud = 20
+    [ 15,  85]   // actual fraud: predicted legit = 15, predicted fraud = 85
+  ];
+
+  // We can use a heatmap to display the confusion matrix
+  const matrixTrace = {
+    z: confusionMatrix,
+    x: ["Pred: Legit", "Pred: Fraud"],
+    y: ["Act: Legit", "Act: Fraud"],
+    type: "heatmap",
+    colorscale: "Greens",
+    showscale: true
+  };
+
+  // Example ROC curve points
+  // false positive rate (FPR) vs true positive rate (TPR)
+  const fprValues = [0, 0.01, 0.03, 0.1, 0.2, 1];
+  const tprValues = [0, 0.8, 0.9, 0.93, 0.97, 1];
+
+  const rocTrace = {
+    x: fprValues,
+    y: tprValues,
+    mode: "lines+markers",
+    name: "ROC Curve",
+    line: { color: "#FF2D55" }
+  };
+
+  // Diagonal reference line (for baseline random model)
+  const diagonalTrace = {
+    x: [0,1],
+    y: [0,1],
+    mode: "lines",
+    name: "Random (AUC=0.5)",
+    line: { dash: "dash", color: "#666" }
+  };
+
+  const layoutFraud = {
+    title: "Fraud Detection: Confusion Matrix & ROC Curve",
+    grid: { rows: 1, columns: 2, pattern: "independent" },
+    paper_bgcolor: "#fff",
+    plot_bgcolor: "#fff"
+  };
+
+  // Subplot 1: Confusion Matrix
+  const trace1 = Object.assign({}, matrixTrace, { xaxis: "x", yaxis: "y" });
+  // Subplot 2: ROC Curve
+  const trace2 = Object.assign({}, rocTrace, { xaxis: "x2", yaxis: "y2" });
+  const trace3 = Object.assign({}, diagonalTrace, { xaxis: "x2", yaxis: "y2" });
+
+  Plotly.newPlot("fraudChart", [trace1, trace2, trace3], {
+    ...layoutFraud,
+    xaxis: {domain: [0, 0.45], title: "Predicted Class"},
+    yaxis: {domain: [0, 1], title: "Actual Class"},
+    xaxis2: {domain: [0.55, 1], title: "False Positive Rate"},
+    yaxis2: {domain: [0, 1], title: "True Positive Rate"}
+  });
+}
+

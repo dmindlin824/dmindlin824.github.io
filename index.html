@@ -393,6 +393,56 @@
         highlighting critical events in real-time.
       </p>
     </section>
+    <!-- Project 5 Container -->
+<section class="project-container" data-aos="fade-up" data-aos-duration="900">
+  <h2>Project 5: Credit Card Fraud Detection</h2>
+  <p>
+    <strong>Project Overview:</strong> In this self-directed project, I explored classification 
+    techniques to identify potentially fraudulent transactions. Since fraud typically accounts 
+    for a tiny percentage of all credit card activity, my primary challenge was dealing with 
+    this highly imbalanced dataset to ensure legitimate transactions weren’t frequently misclassified 
+    while still catching true fraud.
+  </p>
+  <p>
+    <strong>Process:</strong>
+    First, I split the transaction data into training and test sets. I then introduced specialized 
+    methods for imbalanced learning, such as <em>SMOTE</em> (Synthetic Minority Over-Sampling Technique) 
+    to replicate fraud examples more evenly, and <em>undersampling</em> of legitimate transactions 
+    to maintain a workable ratio. I ran multiple experiments using <strong>RandomForestClassifier</strong> 
+    and <strong>XGBoost</strong> with a heavy focus on the <em>ROC–AUC</em> (Receiver Operating 
+    Characteristic–Area Under the Curve) as my primary evaluation metric, because it illustrates 
+    how well the model distinguishes fraud from legitimate transactions at various thresholds.
+  </p>
+  <p>
+    <strong>Results &amp; Insights:</strong>
+    My final ensemble model achieved ~98% ROC–AUC, reducing missed fraud (false negatives) significantly. 
+    I also analyzed false positives (legitimate transactions flagged as fraud), finding patterns like 
+    legitimate overseas travel or sporadic big-ticket purchases. By applying domain knowledge 
+    to these borderline cases, I refined the pipeline to avoid inconveniencing users who legitimately 
+    exhibit “abnormal” patterns. Overall, this approach showcased how careful handling of minority classes 
+    can deliver high-confidence fraud alerts without overwhelming call centers or negatively impacting 
+    customer experiences.
+  </p>
+
+  <!-- Chart Container -->
+  <div id="fraudChart" class="vis-container"></div>
+  
+  <p>
+    <em>Visualization: Confusion Matrix &amp; ROC Curve</em><br/>
+    Here, you can see a <strong>confusion matrix</strong> (a table comparing predicted vs. actual classes), 
+    which helps measure how many transactions were correctly or incorrectly categorized. A <em>False Positive</em> 
+    occurs when a legitimate transaction is wrongly flagged as fraud, while a <em>False Negative</em> happens 
+    if a fraudulent transaction is incorrectly labeled as legitimate. On the right is the <strong>ROC curve</strong> 
+    (Receiver Operating Characteristic curve), plotting the <em>True Positive Rate</em> (the fraction of all 
+    fraud that is correctly caught) against the <em>False Positive Rate</em> (the fraction of all legitimate 
+    transactions that are incorrectly flagged). The further the ROC curve pushes toward the top-left, the 
+    better the model is at distinguishing fraud from legitimate transactions across different thresholds. 
+    This curve’s <em>Area Under the Curve (AUC)</em> is a consolidated measure of the model’s overall 
+    separating power.
+  </p>
+</section>
+
+  
   </section>
 
   <!-- Contact Section -->
