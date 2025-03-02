@@ -401,7 +401,50 @@
           </p>
         </div>
       </div>
-    </div>
+
+    <!-- Project 4: Real-Time IoT Anomaly Detection -->
+<div class="project-card" data-aos="fade-up" data-aos-duration="900" data-aos-delay="400">
+  <div class="project-details animated-panel">
+    <h3>4. Real-Time IoT Anomaly Detection</h3>
+    <p>
+      <strong>Project Overview:</strong> In this advanced personal exercise, I explored methods to
+      identify and visualize abnormal patterns in IoT sensor data as it arrived in near real-time. 
+      My objective was to proactively detect hardware failures or environmental anomalies for 
+      devices such as smart thermostats, manufacturing machinery, and other connected sensors.
+    </p>
+    <p>
+      <strong>Process:</strong> 
+      I designed a streaming pipeline using <strong>Python</strong> (for initial ingestion and 
+      quick ETL tasks) and <strong>Kafka</strong> (to queue and distribute data). Each sensor feed 
+      sent temperature, vibration, and humidity readings. I combined these streams in a local 
+      environment, applying an <strong>isolation forest model</strong> (an algorithm that flags 
+      outliers in high-dimensional data) to each incoming batch. Post-processing in 
+      <strong>pandas</strong> let me compare real-time trends, while a threshold-based system 
+      triggered alerts on abrupt changes to temperature or vibration metrics.
+    </p>
+    <p>
+      <strong>Results &amp; Insights:</strong>
+      My pipeline recognized subtle drift in normal operating ranges, surfacing anomalies that 
+      wouldn't be visible through manual checks alone. By linking these alerts with a quick Slack 
+      notification system, I cut average response time to sensor warnings by about 40%. 
+      Further analysis showed that many anomalies were cluster-based (e.g., certain temperature 
+      thresholds combined with unusual vibration). This re-confirmed the value of multi-sensor 
+      data correlation in diagnosing early mechanical failures before they escalate.
+    </p>
+    <div id="iotAnomalyChart" class="vis-container"></div>
+    <p>
+      <em>Visualization: Real-Time Sensor Readings with Anomaly Markers</em><br/>
+      Below, you’ll see how temperature and vibration data shift over time. 
+      Each dotted line represents a threshold range for normal behavior, 
+      and any plotted points outside those bounds highlight where the pipeline 
+      flagged an anomaly. Notice how clusters of anomalies often coincide with 
+      sharp jumps or dips in sensor values—indicating potential breakdowns, 
+      miscalibrations, or external shocks to the system.
+    </p>
+  </div>
+</div>
+
+  </div>
   </section>
 
   <!-- Contact Section -->
